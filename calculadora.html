@@ -9,10 +9,10 @@
 <body>
     <div class="calculator">
         <div class="display">
-            <input type="text" id="result" readonly value="0">
             <div id="expression-container">
-                <input type="text" id="expression" readonly>
+                <input type="text" id="expression" readonly value="">
             </div>
+            <input type="text" id="result" readonly value="0">
         </div>
         <div class="buttons">
             <button onclick="clearEntry()">CE</button>
@@ -45,7 +45,7 @@
             <button onclick="appendToExpression('3.14159')">π</button>
             <button onclick="appendToExpression('+')">+</button>
 
-            <button onclick="calculate()">=</button>
+            <button onclick="calculate()" class="equals-button">=</button>
             <button class="camera-button" onclick="openCamera()">Cam</button>
         </div>
     </div>

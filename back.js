@@ -6,9 +6,11 @@ function appendToExpression(value) {
     const expressionInput = document.getElementById('expression');
     const resultInput = document.getElementById('result');
 
+    // Mantener el 0 en el resultado hasta que se presione igual
+    resultInput.value = '0';
+
     if (displayMode === 'result' && '0123456789.'.includes(value)) {
         expressionInput.value = value;
-        resultInput.value = value;
         displayMode = 'expression';
     } else if (displayMode === 'result') {
         if (value === 'sin' || value === '√') {
@@ -16,11 +18,9 @@ function appendToExpression(value) {
         } else {
             expressionInput.value = resultInput.value + value;
         }
-        resultInput.value = expressionInput.value;
         displayMode = 'expression';
     } else {
         expressionInput.value += value === 'sin' ? 'sin(' : value === '√' ? 'sqrt(' : value;
-        resultInput.value = expressionInput.value;
     }
 }
 
@@ -28,7 +28,8 @@ function clearEntry() {
     const expressionInput = document.getElementById('expression');
     const resultInput = document.getElementById('result');
     expressionInput.value = expressionInput.value.slice(0, -1);
-    resultInput.value = expressionInput.value || '0';
+    // Mantener el 0 en el resultado
+    resultInput.value = '0';
 }
 
 function clearAll() {
@@ -53,11 +54,13 @@ function memoryRecall() {
 
     if (displayMode === 'result') {
         expressionInput.value = memory.toString();
-        resultInput.value = memory.toString();
+        // Mantener el 0 en el resultado
+        resultInput.value = '0';
         displayMode = 'expression';
     } else {
         expressionInput.value += memory.toString();
-        resultInput.value = expressionInput.value;
+        // Mantener el 0 en el resultado
+        resultInput.value = '0';
     }
 }
 
@@ -69,7 +72,8 @@ function calculate() {
     try {
         expression = expression.replace(/sin\(/g, 'Math.sin(');
         expression = expression.replace(/sqrt\(/g, 'Math.sqrt(');
-        resultInput.value = eval(expression);
+        const result = eval(expression);
+        resultInput.value = result;
         displayMode = 'result';
     } catch (error) {
         resultInput.value = 'Error';
