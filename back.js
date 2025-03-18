@@ -227,13 +227,14 @@ function memoryRecall() {
     }
 }
 
+// Find the calculate function and replace it with this updated version:
 function calculate() {
     const expressionInput = document.getElementById('expression');
     const resultInput = document.getElementById('result');
     let expression = expressionInput.value;
 
     try {
-        // Convertir grados a radianes para la función seno
+        // Modified to convert degrees to radians for sine function
         expression = expression.replace(/sin\(/g, 'Math.sin((Math.PI/180) * ');
         expression = expression.replace(/sqrt\(/g, 'Math.sqrt(');
         const result = eval(expression);
