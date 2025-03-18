@@ -197,12 +197,14 @@ function clearEntry() {
     // Mantener el 0 en el resultado
     resultInput.value = '0';
 }
+//Limpia completamente la expresión y el resultado
 function clearAll() {
     document.getElementById('expression').value = '';
     document.getElementById('result').value = '0';
     displayMode = 'result';
 }
 
+//Guardan y recuperan valores en la memoria de la calculadora
 function memoryStore() {
     const resultInput = document.getElementById('result');
     if (resultInput.value !== '' && resultInput.value !== 'Error') {
@@ -212,7 +214,6 @@ function memoryStore() {
         setTimeout(() => { resultInput.value = originalValue; }, 500);
     }
 }
-
 function memoryRecall() {
     const expressionInput = document.getElementById('expression');
     const resultInput = document.getElementById('result');
@@ -229,14 +230,13 @@ function memoryRecall() {
     }
 }
 
-// Find the calculate function and replace it with this updated version:
+//Evalúa la expresión matemática actual
 function calculate() {
     const expressionInput = document.getElementById('expression');
     const resultInput = document.getElementById('result');
     let expression = expressionInput.value;
 
     try {
-        // Modified to convert degrees to radians for sine function
         expression = expression.replace(/sin\(/g, 'Math.sin((Math.PI/180) * ');
         expression = expression.replace(/raiz\(/g, 'Math.sqrt(');
         const result = eval(expression);
@@ -248,14 +248,16 @@ function calculate() {
     }
 }
 
+//Funciones de Interfaz
+
+// Cambiar función para usar reconocimiento de voz en lugar de cámara
 function openAudio() {
-    // Cambiar función para usar reconocimiento de voz en lugar de cámara
     toggleVoiceRecognition();
 }
 
+// Detener reconocimiento de voz
 function close() {
     document.getElementById('voz-container').style.display = 'none';
-    // Detener reconocimiento de voz
     stopListening();
 }
 
