@@ -15,7 +15,7 @@ function initSpeechRecognition() {
         return false;
     }
     
-    recognition.lang = 'es-ES';  // Idioma español
+    recognition.lang = 'es-ES'; 
     recognition.continuous = false;
     recognition.interimResults = false;
     
