@@ -251,9 +251,8 @@ function openAudio() {
 }
 
 function close() {
-    // Por si aún necesitamos cerrar la cámara en algún punto
     document.getElementById('voz-container').style.display = 'none';
-    // También detener reconocimiento de voz
+    // Detener reconocimiento de voz
     stopListening();
 }
 
