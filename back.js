@@ -180,13 +180,13 @@ function appendToExpression(value) {
         displayMode = 'expression';
     } else if (displayMode === 'result') {
         if (value === 'sin' || value === '√') {
-            expressionInput.value = (value === 'sin' ? 'sin(' : 'sqrt(') + resultInput.value;
+            expressionInput.value = (value === 'sin' ? 'sin(' : 'raiz(') + resultInput.value;
         } else {
             expressionInput.value = resultInput.value + value;
         }
         displayMode = 'expression';
     } else {
-        expressionInput.value += value === 'sin' ? 'sin(' : value === '√' ? 'sqrt(' : value;
+        expressionInput.value += value === 'sin' ? 'sin(' : value === '√' ? 'raiz(' : value;
     }
 }
 //Elimina el último carácter de la expresión
@@ -238,7 +238,7 @@ function calculate() {
     try {
         // Modified to convert degrees to radians for sine function
         expression = expression.replace(/sin\(/g, 'Math.sin((Math.PI/180) * ');
-        expression = expression.replace(/sqrt\(/g, 'Math.sqrt(');
+        expression = expression.replace(/raiz\(/g, 'Math.sqrt(');
         const result = eval(expression);
         resultInput.value = result;
         displayMode = 'result';
