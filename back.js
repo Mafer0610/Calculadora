@@ -1,10 +1,10 @@
-let memory = 0;
-let displayMode = 'result';
-let stream = null;
-let recognition = null;
-let isListening = false;
+let memory = 0; //Es pa almacena el valor guardado en memoria de la calculadora
+let displayMode = 'result'; //Pa controlar que se muestra
+let stream = null; //Esto es pa la funcionalidad de streaming (no utilizada activamente)
+let recognition = null; //Almacenamiento del reconocimiento de voz
+let isListening = false; //Checa que el reconocimiento de voz está activo
 
-// Inicializar el reconocimiento de voz
+//Reconocimiento de Voz
 function initSpeechRecognition() {
     if ('webkitSpeechRecognition' in window) {
         recognition = new webkitSpeechRecognition();
@@ -44,7 +44,7 @@ function initSpeechRecognition() {
     return true;
 }
 
-// Procesar comandos de voz
+// Procesamiento de comandos de voz
 function processVoiceCommand(transcript) {
     console.log('Comando de voz recibido:', transcript);
         const voiceCommands = {
@@ -130,6 +130,8 @@ function processVoiceCommand(transcript) {
     }
 }
 
+//Control del Reconocimiento de Voz
+
 // Iniciar/detener la escucha de voz
 function toggleVoiceRecognition() {
     if (!recognition && !initSpeechRecognition()) {
@@ -141,7 +143,6 @@ function toggleVoiceRecognition() {
         stopListening();
     }
 }
-
 function startListening() {
     isListening = true;
     recognition.start();
@@ -152,7 +153,6 @@ function startListening() {
         vozButton.style.backgroundColor = '#FF4444';
     }
 }
-
 function stopListening() {
     isListening = false;
     if (recognition) {
@@ -167,11 +167,12 @@ function stopListening() {
     }
 }
 
+//Funciones de la Calculadora
 function appendToExpression(value) {
     const expressionInput = document.getElementById('expression');
     const resultInput = document.getElementById('result');
 
-    // Mantener el 0 en el resultado hasta que se presione igual
+    //0 hasta que se presione igual
     resultInput.value = '0';
 
     if (displayMode === 'result' && '0123456789.'.includes(value)) {
@@ -188,7 +189,7 @@ function appendToExpression(value) {
         expressionInput.value += value === 'sin' ? 'sin(' : value === '√' ? 'sqrt(' : value;
     }
 }
-
+//Elimina el último carácter de la expresión
 function clearEntry() {
     const expressionInput = document.getElementById('expression');
     const resultInput = document.getElementById('result');
@@ -196,7 +197,6 @@ function clearEntry() {
     // Mantener el 0 en el resultado
     resultInput.value = '0';
 }
-
 function clearAll() {
     document.getElementById('expression').value = '';
     document.getElementById('result').value = '0';
