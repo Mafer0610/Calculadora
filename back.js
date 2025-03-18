@@ -33,10 +33,10 @@ function initSpeechRecognition() {
         if (isListening) {
             recognition.start(); // Reiniciar la escucha 
         } else {
-            const cameraButton = document.querySelector('.voz-button');
-            if (cameraButton) {
-                cameraButton.textContent = 'Cam';
-                cameraButton.style.backgroundColor = '#999';
+            const vozButton = document.querySelector('.voz-button');
+            if (vozButton) {
+                vozButton.textContent = 'Voz';
+                vozButton.style.backgroundColor = '#999';
             }
         }
     };
@@ -144,10 +144,10 @@ function startListening() {
     isListening = true;
     recognition.start();
     
-    const cameraButton = document.querySelector('.voz-button');
-    if (cameraButton) {
-        cameraButton.textContent = 'Escuchando...';
-        cameraButton.style.backgroundColor = '#FF4444';
+    const vozButton = document.querySelector('.voz-button');
+    if (vozButton) {
+        vozButton.textContent = 'Escuchando...';
+        vozButton.style.backgroundColor = '#FF4444';
     }
 }
 
@@ -158,10 +158,10 @@ function stopListening() {
     }
     
     // Restaurar apariencia del botón
-    const cameraButton = document.querySelector('.voz-button');
-    if (cameraButton) {
-        cameraButton.textContent = 'Cam';
-        cameraButton.style.backgroundColor = '#999';
+    const vozButton = document.querySelector('.voz-button');
+    if (vozButton) {
+        vozButton.textContent = 'Voz';
+        vozButton.style.backgroundColor = '#999';
     }
 }
 
@@ -233,7 +233,8 @@ function calculate() {
     let expression = expressionInput.value;
 
     try {
-        expression = expression.replace(/sin\(/g, 'Math.sin(');
+        // Convertir grados a radianes para la función seno
+        expression = expression.replace(/sin\(/g, 'Math.sin((Math.PI/180) * ');
         expression = expression.replace(/sqrt\(/g, 'Math.sqrt(');
         const result = eval(expression);
         resultInput.value = result;
@@ -249,12 +250,11 @@ function openAudio() {
     toggleVoiceRecognition();
 }
 
-function closeCamera() {
+function close() {
     // Por si aún necesitamos cerrar la cámara en algún punto
     document.getElementById('voz-container').style.display = 'none';
     // También detener reconocimiento de voz
     stopListening();
 }
 
-// Inicializar reconocimiento de voz al cargar
 window.addEventListener('DOMContentLoaded', initSpeechRecognition);
